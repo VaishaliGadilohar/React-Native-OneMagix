@@ -9,6 +9,17 @@ const ForgotPassword = () => {
       <CustomText style ={styles.label}>forgot password</CustomText>
        <Link href={"/login"} 
        style={{ color: "#e06b0bff", textAlign: "center" }}>Go To Login Page</Link>
+
+        <Link href={"/(drawer)/(tabs)"} 
+       style={{ color: "#e06b0bff", textAlign: "center" }}>Go To Home Page</Link>
+    
+      <Link href={"/ReactQuery"} 
+       style={{ color: "#e06b0bff", textAlign: "center" }}>React Query</Link>
+
+       <Link href={ "/ReactData"}
+            style={{ color: "#e06b0bff", textAlign: "center" }}>React Data</Link>
+
+
     </View>
   )
 }

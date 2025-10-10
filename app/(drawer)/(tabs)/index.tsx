@@ -1,85 +1,10 @@
-// import CustomText from '@/component/CustomText';
-// import useTheme from '@/hooks/useTheme';
-// import { Link, useRouter } from 'expo-router';
-// import { Button, Pressable, StyleSheet, View } from 'react-native';
-// import useStore from '../../../store/useStore';
 
-
-
-// const  HomeScreen =() =>{
-//     const router = useRouter();
-//     //   const { count } = useCounter();
-//   const { theme } = useTheme();
-
-// const { count } = useStore();
-
-//  const handlePress = () => {
-  
-//     //Alert.alert('Button Pressed!');
-//     //router.navigate("/contact");
-//    //router.push('/root/settings/media');
-
-//    router.push("/contact")
-//   };
-//   return (
-      
-//      <View style={[styles.container, { backgroundColor: theme.background }]}>
-
-//     {/* // <View style={styles.container}> */}
-//       <CustomText>
-//         Welcome to Home page
-        
-//       </CustomText>
-//      <CustomText>
-//        using utilizing context count value : {count}  
-        
-//       </CustomText>
-//        <Link href={ "/about"}>About Page Using Link</Link>
-
-//        <Link href={"/login"} asChild>
-//        <Pressable>
-//         <CustomText>
-//           Go To Login Page Using link but presable
-//         </CustomText>
-//        </Pressable>
-//        </Link>
-
-//       <Link href="/details" style={styles.link}>
-//         Open modal
-//       </Link>
-
-//      <Link href="/register" style={styles.link}>
-//        Register
-//       </Link>
-//       <Button
-//         onPress={handlePress}
-//         title="Contact"
-//         color="#841584" // Optional: custom color
-//       />
-//     </View>
-//   );
-// }
-
-//  export default HomeScreen;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     gap:10
-//   },
-//   link: {
-//     paddingTop: 20,
-//     fontSize: 20,
-//   },
-// });
 
 import CustomText from '@/component/CustomText';
 import useTheme from '@/hooks/useTheme';
 import { Link, useRouter } from 'expo-router';
-import { Image, Pressable, StyleSheet, View } from 'react-native';
-import { useAuthStore } from '../../..//store/authStrore';
+import { Image, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { useAuthStore } from '../../../store/authStrore';
 import useStore from '../../../store/useStore';
 
 const HomeScreen = () => {
@@ -93,15 +18,19 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <CustomText style={styles.title}>🏠 Welcome to Home</CustomText>
+    <ScrollView
+      style={[styles.container, { backgroundColor: theme.background }]}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <CustomText style={styles.title}>🏡 Welcome Home</CustomText>
 
       <CustomText style={styles.subtitle}>
-        Context Count Value : <CustomText style={styles.highlight}>{count}</CustomText>
+        Current Count: <CustomText style={styles.highlight}>{count}</CustomText>
       </CustomText>
 
       {user ? (
-        <View style={styles.profileBox}>
+        <View style={styles.profileCard}>
           <Image source={{ uri: user.picture }} style={styles.avatar} />
           <CustomText style={styles.name}>{user.name}</CustomText>
           <CustomText style={styles.email}>{user.email}</CustomText>
@@ -110,30 +39,34 @@ const HomeScreen = () => {
         <CustomText style={styles.noUser}>No user logged in</CustomText>
       )}
 
-      <View style={styles.links}>
-        <Link href={"/about"} style={styles.linkBtn}>
-          <CustomText style={styles.linkText}>📖 About Page</CustomText>
+      <View style={styles.linksContainer}>
+        <Link href="/about" style={styles.cardLink}>
+          <CustomText style={styles.cardText}>📖 About</CustomText>
         </Link>
 
-        <Link href={"/login"} asChild>
-          <Pressable style={styles.linkBtn}>
-            <CustomText style={styles.linkText}>🔑 Go To Login</CustomText>
+        <Link href="/login" asChild>
+          <Pressable style={styles.cardLink}>
+            <CustomText style={styles.cardText}>🔑 Login</CustomText>
           </Pressable>
         </Link>
 
-        <Link href="/details" style={styles.linkBtn}>
-          <CustomText style={styles.linkText}>📂 Open Modal</CustomText>
+        <Link href="/details" style={styles.cardLink}>
+          <CustomText style={styles.cardText}>📂 Details</CustomText>
         </Link>
 
-        <Link href="/register" style={styles.linkBtn}>
-          <CustomText style={styles.linkText}>📝 Register</CustomText>
+        <Link href="/register" style={styles.cardLink}>
+          <CustomText style={styles.cardText}>📝 Register</CustomText>
+        </Link>
+
+        <Link href="/todo" style={styles.cardLink}>
+          <CustomText style={styles.cardText}>📝 ToDo</CustomText>
         </Link>
       </View>
 
       <Pressable style={styles.contactBtn} onPress={handlePress}>
-        <CustomText style={styles.contactText}>📩 Contact</CustomText>
+        <CustomText style={styles.contactText}>📩 Contact Us</CustomText>
       </Pressable>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -142,94 +75,109 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 40,
-    gap: 15,
+  },
+  contentContainer: {
+    alignItems: 'center',
+    paddingVertical: 50,
   },
   title: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 10,
-    color: "#f8811f",
+    color: "#4A90E2",
     textAlign: "center",
+    marginBottom: 5,
   },
   subtitle: {
     fontSize: 16,
-    marginBottom: 20,
-    color: "#555",
+    color: "#666",
+    marginBottom: 25,
+    textAlign: "center",
   },
   highlight: {
     fontWeight: "bold",
-    color: "#f07e3c",
+    color: "#FF8C42",
   },
-  profileBox: {
+  profileCard: {
+    width: '90%',
+    backgroundColor: '#F9F9F9',
+    borderRadius: 20,
+    padding: 25,
     alignItems: 'center',
-    marginVertical: 20,
-    backgroundColor: "#fff",
-    padding: 20,
-    borderRadius: 15,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowOffset: { width: 0, height: 6 },
     shadowRadius: 10,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 5,
-    width: "90%",
+    elevation: 3,
+    marginBottom: 30,
   },
   avatar: {
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    marginBottom: 10,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 15,
+    borderWidth: 2,
+    borderColor: "#E0E0E0",
   },
   name: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: "#333",
+    fontWeight: '700',
+    color: '#333',
+    marginBottom: 5,
   },
   email: {
     fontSize: 14,
-    color: 'gray',
+    color: '#888',
   },
   noUser: {
     fontSize: 16,
-    color: "red",
-    marginVertical: 10,
-  },
-  links: {
-    width: "100%",
-    alignItems: "center",
+    color: '#E74C3C',
     marginVertical: 15,
   },
-  linkBtn: {
-    backgroundColor: "#f8811f",
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 12,
-    marginVertical: 6,
-    width: "90%",
-    alignItems: "center",
+  linksContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    marginBottom: 30,
   },
-  linkText: {
-    color: "#fff",
+  cardLink: {
+    backgroundColor: '#FFFFFF',
+    width: '42%',
+    marginVertical: 8,
+    paddingVertical: 20,
+    borderRadius: 15,
+    alignItems: 'center', // center icon/text
+    justifyContent: 'center', // vertically center
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 8,
+    elevation: 2,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  cardText: {
+    color: '#4A90E2',
     fontSize: 16,
-    fontWeight: "500",
+    fontWeight: '600',
+    textAlign: 'center', // text center
   },
   contactBtn: {
-    marginTop: 15,
-    backgroundColor: "#e06b0b",
-    paddingVertical: 14,
-    paddingHorizontal: 30,
-    borderRadius: 14,
-    shadowColor: "#000",
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 4,
+    backgroundColor: '#FFB347',
+    paddingVertical: 18,
+    paddingHorizontal: 35,
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowOffset: { width: 0, height: 6 },
+    shadowRadius: 10,
+    elevation: 3,
+    marginBottom: 50,
   },
   contactText: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 18,
-    fontWeight: "600",
+    fontWeight: '700',
   },
 });

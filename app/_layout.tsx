@@ -63,11 +63,13 @@
 
 
 import { useNavigationTheme } from "@/hooks/useNavigationTheme";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 import React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useTheme } from "../hooks/useTheme";
 import { useThemeStore } from "../store/useThemeStore";
+const queryClient = new QueryClient()
 
 const StackLayout = () => {
   const { theme, isDark } = useTheme(); 
@@ -75,6 +77,8 @@ const StackLayout = () => {
   const { screenOptions } = useNavigationTheme();
 
   return (
+    
+    <QueryClientProvider client={queryClient}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Stack
           screenOptions={
@@ -105,8 +109,31 @@ const StackLayout = () => {
         name="profileDetail"
         options={{ title: "Profile Detail", headerShown: false }}
       />
+
+      <Stack.Screen 
+      name="todo"
+      options={{
+        title :"ToDO",
+        headerShown:false,
+      }}/>
+
+     <Stack.Screen 
+      name="ReactQuery"
+      options={{
+        title :"ReactQuery",
+        headerShown:false,
+      }}/>
+
+      <Stack.Screen 
+      name="ReactData"
+      options={{
+        title :"ReactData",
+        headerShown:false,
+      }}/>
+
     </Stack>
     </GestureHandlerRootView>
+    </QueryClientProvider>
   );
 };
 

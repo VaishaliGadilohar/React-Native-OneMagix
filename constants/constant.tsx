@@ -31,5 +31,6 @@ export const apiName ={
     ForgotPassword : "forgotpassword",
     sendotp: "/api/auth/v1/send-signup-otp",
     rolefetch: "api/user/v1/role-fetch",
-    getInfo :"/users"
+    getInfo :"/users",
+    gePost : "/posts"
 }
