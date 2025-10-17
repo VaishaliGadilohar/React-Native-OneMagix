@@ -1,6 +1,5 @@
 import CustomText from '@/component/CustomText'
 import { Link } from 'expo-router'
-import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
 const ForgotPassword = () => {
@@ -18,6 +17,9 @@ const ForgotPassword = () => {
 
        <Link href={ "/ReactData"}
             style={{ color: "#e06b0bff", textAlign: "center" }}>React Data</Link>
+
+       <Link href={ "/useMutation"}
+            style={{ color: "#e06b0bff", textAlign: "center" }}>UseMutation</Link>
 
 
     </View>

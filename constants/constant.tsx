@@ -34,3 +34,9 @@ export const apiName ={
     getInfo :"/users",
     gePost : "/posts"
 }
+
+
+export const BASE_URLS = {
+  store: "https://fakestoreapi.com",             
+  user: "https://jsonplaceholder.typicode.com", 
+};

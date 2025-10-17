@@ -1,20 +1,21 @@
-import { apiName } from "@/constants/constant";
+import { apiName, BASE_URLS } from "@/constants/constant";
 import { useQuery } from "@tanstack/react-query";
 import client from "./client";
+const storeClient = client(BASE_URLS.store);
+const userClient = client(BASE_URLS.user);
 
 export const postData = (data: any, url: string) => {
   console.log("data", data, "url", url);
-
-  return client.post(url, data);
+  return userClient.post(url, data);
 };
 
 export const fetchData = (url: string) => {
-  return client.get(url);
+  return userClient.get(url);
 
 
 };
 export const fetchProductData = (url: string) => {
-  const res = client.get(url);
+  const res = userClient.get(url);
 
   return res
 };
@@ -35,21 +36,18 @@ export const useSearchInfoV2 = () => {
 
 
 
-// GET: Fetch posts
 export const getPosts = async (url: string) => {
-  const res = await client.get(url);
-  return res.data; // ✅ always return data
+  const res = await storeClient.get(url);
+  return res.data; 
 };
 
-// POST: Add new post
-export const addPost = async (newPost: any) => {
-  const res = await client.post("/posts", newPost);
+export const addPost = async (url: string, newPost: any) => {
+  const res = await storeClient.post(url, newPost);
   return res.data;
 };
 
-// DELETE: Delete a post
-export const deletePost = async (id: number) => {
-  const res = await client.delete(`/posts/${id}`);
+export const deletePost = async (url: string,id: number) => {
+  const res = await storeClient.delete(`/${url}/${id}`);
   return res.data;
 };
 

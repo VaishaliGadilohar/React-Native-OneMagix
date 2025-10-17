@@ -63,21 +63,21 @@
 
 
 import { useNavigationTheme } from "@/hooks/useNavigationTheme";
+import { usePushNoti } from "@/services/pushNoti";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
-import React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useTheme } from "../hooks/useTheme";
 import { useThemeStore } from "../store/useThemeStore";
 const queryClient = new QueryClient()
 
 const StackLayout = () => {
-  const { theme, isDark } = useTheme(); 
-  const toggleTheme = useThemeStore((state) => state.toggleTheme); 
+  const { theme, isDark } = useTheme();
+  const toggleTheme = useThemeStore((state) => state.toggleTheme);
   const { screenOptions } = useNavigationTheme();
-
+  usePushNoti();
   return (
-    
+
     <QueryClientProvider client={queryClient}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Stack
@@ -85,54 +85,60 @@ const StackLayout = () => {
             screenOptions
           }
         >
-      <Stack.Screen
-        name="index"
-        options={{ title: "Login", headerShown: false }}
-      />
-      <Stack.Screen
-        name="login"
-        options={{ title: "Login", headerShown: false }}
-      />
-      <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-      <Stack.Screen name="contact" options={{ title: "Contact" }} />
-      <Stack.Screen name="about" options={{ title: "About" }} />
-      <Stack.Screen name="details" options={{ presentation: "modal" }} />
-      <Stack.Screen
-        name="register"
-        options={{ title: "Register", headerShown: false }}
-      />
-      <Stack.Screen
-        name="forgotpassword"
-        options={{ title: "ForgotPassword", headerShown: false }}
-      />
-      <Stack.Screen
-        name="profileDetail"
-        options={{ title: "Profile Detail", headerShown: false }}
-      />
+          <Stack.Screen
+            name="index"
+            options={{ title: "Login", headerShown: false }}
+          />
+          <Stack.Screen
+            name="login"
+            options={{ title: "Login", headerShown: false }}
+          />
+          <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+          <Stack.Screen name="contact" options={{ title: "Contact" }} />
+          <Stack.Screen name="about" options={{ title: "About" }} />
+          <Stack.Screen name="details" options={{ presentation: "modal" }} />
+          <Stack.Screen
+            name="register"
+            options={{ title: "Register", headerShown: false }}
+          />
+          <Stack.Screen
+            name="forgotpassword"
+            options={{ title: "ForgotPassword", headerShown: false }}
+          />
+          <Stack.Screen
+            name="profileDetail"
+            options={{ title: "Profile Detail", headerShown: false }}
+          />
 
-      <Stack.Screen 
-      name="todo"
-      options={{
-        title :"ToDO",
-        headerShown:false,
-      }}/>
+          <Stack.Screen
+            name="todo"
+            options={{
+              title: "ToDO",
+              headerShown: false,
+            }} />
 
-     <Stack.Screen 
-      name="ReactQuery"
-      options={{
-        title :"ReactQuery",
-        headerShown:false,
-      }}/>
+          <Stack.Screen
+            name="ReactQuery"
+            options={{
+              title: "ReactQuery",
+              headerShown: false,
+            }} />
 
-      <Stack.Screen 
-      name="ReactData"
-      options={{
-        title :"ReactData",
-        headerShown:false,
-      }}/>
+          <Stack.Screen
+            name="ReactData"
+            options={{
+              title: "ReactData",
+              headerShown: false,
+            }} />
+          <Stack.Screen
+            name="useMutation"
+            options={{
+              title: "useMutation",
+              headerShown: false,
+            }} />
 
-    </Stack>
-    </GestureHandlerRootView>
+        </Stack>
+      </GestureHandlerRootView>
     </QueryClientProvider>
   );
 };
